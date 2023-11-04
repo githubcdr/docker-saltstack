@@ -11,7 +11,7 @@ env:
   COMPOSE_DOCKER_CLI_BUILD: 1
   DOCKER_CLI_EXPERIMENTAL: enabled
   AUTHOR: ${{ github.actor }}
-  REPO_NAME: "docker-saltstack"
+  REPO_NAME: "saltstack"
   REPO_OWNER: ${{ github.repository_owner }}
 
 jobs:
@@ -37,9 +37,7 @@ jobs:
           # generate Docker tags based on the following events/attributes
           tags: |
             type=ref,event=branch
-            type=semver,pattern=v{{version}}
-            type=semver,pattern=v{{major}}.{{minor}}
-            type=semver,pattern=v{{major}}
+            type=schedule
           labels: |
             maintainer=${{env.AUTHOR}}
             org.opencontainers.image.created=${{ steps.date.outputs.date }}
