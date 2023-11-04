@@ -33,9 +33,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            ghcr.io/githubcdr/hosting-tools
             docker.io/cdrocker/hosting-tools
-            git.codar.nl/codarhq/hosting-tools
           # generate Docker tags based on the following events/attributes
           tags: |
             type=ref,event=branch
