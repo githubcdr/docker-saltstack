@@ -14,7 +14,7 @@ env:
   REPO_OWNER: ${{ github.repository_owner }}
 
 jobs:
-  ci:
+  release:
     permissions:
       packages: write
     runs-on: ubuntu-22.04
