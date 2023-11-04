@@ -10,7 +10,7 @@ env:
   COMPOSE_DOCKER_CLI_BUILD: 1
   DOCKER_CLI_EXPERIMENTAL: enabled
   AUTHOR: ${{ github.actor }}
-  REPO_NAME: "docker-saltstack"
+  REPO_NAME: "saltstack"
   REPO_OWNER: ${{ github.repository_owner }}
 
 jobs:
@@ -32,9 +32,7 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            ghcr.io/githubcdr/hosting-tools
-            docker.io/cdrocker/hosting-tools
-            git.codar.nl/codarhq/hosting-tools
+            docker.io/cdrocker/saltstack
           # generate Docker tags based on the following events/attributes
           tags: |
             type=ref,event=branch
