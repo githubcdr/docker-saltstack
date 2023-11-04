@@ -36,8 +36,7 @@ jobs:
             docker.io/cdrocker/hosting-tools
           # generate Docker tags based on the following events/attributes
           tags: |
-            type=ref,event=branch
-            type=schedule
+            type=semver,pattern={{raw}}
           labels: |
             maintainer=${{env.AUTHOR}}
             org.opencontainers.image.created=${{ steps.date.outputs.date }}
