@@ -35,7 +35,7 @@ jobs:
             docker.io/cdrocker/saltstack
           # generate Docker tags based on the following events/attributes
           tags: |
-            type=semver,pattern={{raw}}
+            type=raw
           labels: |
             maintainer=${{env.AUTHOR}}
             org.opencontainers.image.created=${{ steps.date.outputs.date }}
