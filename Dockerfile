@@ -1,6 +1,6 @@
 FROM cgr.dev/chainguard/wolfi-base AS builder
 ARG TARGETARCH
-ARG VERSION=3.12
+ARG VERSION=3.11
 
 USER root
 RUN apk add --no-cache --update-cache python-${VERSION} cython libcrypto3 libgit2-dev libgit2 python-${VERSION}-dev gcc build-base glibc-dev ld-linux
@@ -17,7 +17,7 @@ LABEL org.opencontainers.image.source "http://github.com/githubcdr/docker-saltst
 LABEL org.opencontainers.image.licenses "Apache2"
 LABEL org.opencontainers.image.vendor "githubcdr"
 ARG TARGETARCH
-ARG VERSION=3.12
+ARG VERSION=3.11
 USER root
 #RUN apk add --no-cache --update-cache bash python3 cython libcrypto3 ca-certificates libgit2 py3-cryptography py3-oscrypto && \
 RUN apk add --no-cache --update-cache bash python-${VERSION} cython libcrypto3 libgit2 openssh-client && \
