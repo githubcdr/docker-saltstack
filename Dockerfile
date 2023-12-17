@@ -1,12 +1,13 @@
 FROM cgr.dev/chainguard/wolfi-base AS builder
 ARG TARGETARCH
 ARG VERSION=3.11
+ARG SALT_VERSION=3006.5
 
 USER root
 RUN apk add --no-cache --update-cache python-${VERSION} cython libcrypto3 libgit2-dev libgit2 python-${VERSION}-dev gcc build-base glibc-dev ld-linux
 RUN python -m venv /venv
 RUN /venv/bin/pip install -U pip
-RUN /venv/bin/pip install salt pygit2 croniter tornado backports.ssl-match-hostname pycrypto
+RUN /venv/bin/pip install salt==${SALT_VERSION} pygit2 croniter tornado backports.ssl-match-hostname pycrypto
 RUN /venv/bin/pip uninstall -y setuptools pip
 
 FROM cgr.dev/chainguard/wolfi-base AS runner
