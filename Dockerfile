@@ -1,6 +1,6 @@
 FROM cgr.dev/chainguard/wolfi-base AS builder
 ARG TARGETARCH
-ARG PYTHON_VERSION=3.12
+ARG PYTHON_VERSION=3.11
 ARG SALT_VERSION=3006.7
 
 USER root
@@ -12,7 +12,7 @@ RUN /venv/bin/pip uninstall -y setuptools pip
 
 FROM cgr.dev/chainguard/wolfi-base AS runner
 ARG TARGETARCH
-ARG PYTHON_VERSION=3.12
+ARG PYTHON_VERSION=3.11
 LABEL org.opencontainers.image.title "Saltstack container"
 LABEL org.opencontainers.image.description "Saltstack with minimal dependencies"
 LABEL org.opencontainers.image.authors "githubcdr"
