@@ -1,8 +1,7 @@
 FROM cgr.dev/chainguard/wolfi-base AS builder
 ARG TARGETARCH
 ARG PYTHON_VERSION=3.11
-ARG SALT_VERSION=3006.7
-
+ARG SALT_VERSION=3007.0
 USER root
 RUN apk add --no-cache python-${PYTHON_VERSION} cython libcrypto3 libgit2-dev libgit2 python-${PYTHON_VERSION}-dev gcc build-base glibc-dev ld-linux
 RUN python -m venv /venv
