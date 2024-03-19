@@ -9,7 +9,6 @@ RUN /venv/bin/pip install salt==${SALT_VERSION} pygit2 croniter tornado pycrypto
 RUN /venv/bin/pip uninstall -y setuptools pip
 
 FROM cgr.dev/chainguard/wolfi-base AS runner
-ARG TARGETARCH
 ARG PYTHON_VERSION=3.12
 LABEL org.opencontainers.image.title "Saltstack container"
 LABEL org.opencontainers.image.description "Saltstack with minimal dependencies"
