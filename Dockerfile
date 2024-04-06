@@ -3,7 +3,7 @@ ARG PYTHON_VERSION=3.11
 ARG SALT_VERSION=3007.0
 ENV VIRTUAL_ENV=/venv
 USER root
-WORKDIR ${VIRTUAL_ENV}
+
 RUN apk add --no-cache python-${PYTHON_VERSION} cython libcrypto3 libgit2-dev libgit2 python-${PYTHON_VERSION}-dev gcc build-base glibc-dev ld-linux uv
 RUN uv venv ${VIRTUAL_ENV}
 RUN uv pip install salt==${SALT_VERSION} pygit2 croniter tornado pycrypto
