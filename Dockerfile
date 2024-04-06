@@ -6,7 +6,8 @@ USER root
 
 RUN apk add --no-cache python-${PYTHON_VERSION} cython libcrypto3 libgit2-dev libgit2 python-${PYTHON_VERSION}-dev gcc build-base glibc-dev ld-linux uv
 RUN uv venv ${VIRTUAL_ENV}
-RUN uv pip install salt==${SALT_VERSION} pygit2 croniter tornado pycrypto
+RUN uv pip install --no-cache salt==${SALT_VERSION} pygit2 croniter tornado pycrypto
+RUN uv cache clean
 
 FROM cgr.dev/chainguard/wolfi-base AS runner
 ARG PYTHON_VERSION=3.11
