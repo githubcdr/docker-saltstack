@@ -4,7 +4,7 @@ ARG SALT_VERSION=3007.0
 ENV VIRTUAL_ENV=/venv
 USER root
 
-RUN apk add --no-cache python-${PYTHON_VERSION} cython libcrypto3 libgit2-dev libgit2 python-${PYTHON_VERSION}-dev gcc build-base glibc-dev ld-linux uv
+RUN apk add --no-cache python-${PYTHON_VERSION} libcrypto3 libgit2-dev libgit2 python-${PYTHON_VERSION}-dev gcc build-base glibc-dev ld-linux uv
 RUN uv venv ${VIRTUAL_ENV}
 RUN uv pip install --no-cache salt==${SALT_VERSION} pygit2 croniter tornado pycrypto
 RUN uv cache clean
@@ -18,7 +18,7 @@ LABEL org.opencontainers.image.source "http://github.com/githubcdr/docker-saltst
 LABEL org.opencontainers.image.licenses "Apache2"
 LABEL org.opencontainers.image.vendor "githubcdr"
 USER root
-RUN apk add --no-cache bash python-${PYTHON_VERSION} cython libcrypto3 libgit2 openssh-client && \
+RUN apk add --no-cache bash python-${PYTHON_VERSION} libcrypto3 libgit2 openssh-client yq && \
     ldconfig -v
 USER nonroot
 COPY --from=builder --chown=nonroot:nonroot ${VIRTUAL_ENV} ${VIRTUAL_ENV}
