@@ -4,8 +4,8 @@ ARG SALT_VERSION=3007.0
 USER root
 RUN apk add --no-cache python-${PYTHON_VERSION} libcrypto3 libgit2-dev libgit2 python-${PYTHON_VERSION}-dev gcc build-base glibc-dev ld-linux
 RUN python -m venv /venv
-RUN /venv/bin/pip install -U pip
-RUN /venv/bin/pip install salt==${SALT_VERSION} pygit2 croniter tornado pycrypto
+RUN /venv/bin/pip install --no-cache-dir -U pip
+RUN /venv/bin/pip install --no-cache-dir salt==${SALT_VERSION} pygit2 croniter tornado pycrypto
 RUN /venv/bin/pip uninstall -y setuptools pip
 
 FROM cgr.dev/chainguard/wolfi-base AS runner
