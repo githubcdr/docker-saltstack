@@ -1,13 +1,12 @@
 FROM cgr.dev/chainguard/wolfi-base AS builder
 ARG PYTHON_VERSION=3.11
 ARG SALT_VERSION=3007.0
-ENV VIRTUAL_ENV=/venv
 USER root
-
-RUN apk add --no-cache python-${PYTHON_VERSION} libcrypto3 libgit2-dev libgit2 python-${PYTHON_VERSION}-dev gcc build-base glibc-dev ld-linux uv
-RUN uv venv ${VIRTUAL_ENV}
-RUN uv pip install --no-cache salt==${SALT_VERSION} pygit2 croniter tornado pycrypto
-RUN uv cache clean
+RUN apk add --no-cache python-${PYTHON_VERSION} libcrypto3 libgit2-dev libgit2 python-${PYTHON_VERSION}-dev gcc build-base glibc-dev ld-linux
+RUN python -m venv /venv
+RUN /venv/bin/pip install -U pip
+RUN /venv/bin/pip install salt==${SALT_VERSION} pygit2 croniter tornado pycrypto
+RUN /venv/bin/pip uninstall -y setuptools pip
 
 FROM cgr.dev/chainguard/wolfi-base AS runner
 ARG PYTHON_VERSION=3.11
@@ -18,9 +17,9 @@ LABEL org.opencontainers.image.source "http://github.com/githubcdr/docker-saltst
 LABEL org.opencontainers.image.licenses "Apache2"
 LABEL org.opencontainers.image.vendor "githubcdr"
 USER root
-RUN apk add --no-cache bash python-${PYTHON_VERSION} libcrypto3 libgit2 openssh-client yq && \
+RUN apk add --no-cache bash python-${PYTHON_VERSION} libcrypto3 libgit2 openssh-client && \
     ldconfig -v
 USER nonroot
-COPY --from=builder --chown=nonroot:nonroot ${VIRTUAL_ENV} ${VIRTUAL_ENV}
-ENV PATH=$PATH:${VIRTUAL_ENV}/bin
+COPY --from=builder --chown=nonroot:nonroot /venv /venv
+ENV PATH=/venv/bin:$PATH
 ENTRYPOINT ["salt-master", "-l", "warning"]
