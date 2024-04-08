@@ -11,6 +11,8 @@ RUN /venv/bin/pip install --no-cache-dir salt==${SALT_VERSION} pygit2 croniter t
 RUN /venv/bin/pip uninstall -y setuptools pip
 
 FROM cgr.dev/chainguard/wolfi-base AS runner
+ARG PYTHON_VERSION=3.11
+
 LABEL org.opencontainers.image.title "Saltstack container"
 LABEL org.opencontainers.image.description "Saltstack with minimal dependencies"
 LABEL org.opencontainers.image.authors "githubcdr"
