@@ -1,17 +1,17 @@
 FROM cgr.dev/chainguard/wolfi-base AS builder
-ARG PYTHON_VERSION=3.11
-ARG SALT_VERSION=3007.0
+ARG PYTHON_VERSION=3.12
+ARG SALT_VERSION=3006.9
 ENV PYTHONDONTWRITEBYTECODE=1
 
 USER root
 RUN apk add --no-cache python-${PYTHON_VERSION} libcrypto3 libgit2-dev libgit2 python-${PYTHON_VERSION}-dev gcc build-base glibc-dev ld-linux
 RUN python -m venv /venv
 RUN /venv/bin/pip install --no-cache-dir -U pip
-RUN /venv/bin/pip install --no-cache-dir salt==${SALT_VERSION} pygit2 croniter tornado pycrypto
+RUN /venv/bin/pip install --no-cache-dir salt==${SALT_VERSION} pygit2==1.13.1 croniter tornado pycrypto
 RUN /venv/bin/pip uninstall -y setuptools pip
 
 FROM cgr.dev/chainguard/wolfi-base AS runner
-ARG PYTHON_VERSION=3.11
+ARG PYTHON_VERSION=3.12
 
 LABEL org.opencontainers.image.title "Saltstack container"
 LABEL org.opencontainers.image.description "Saltstack with minimal dependencies"
