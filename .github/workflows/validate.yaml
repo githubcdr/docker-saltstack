@@ -18,7 +18,7 @@ jobs:
   validate:
     permissions:
       packages: write
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
 #      - name: Show GitHub context   
 #        env:
