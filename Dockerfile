@@ -12,7 +12,7 @@ WORKDIR /venv
 RUN apk add --no-cache python-${PYTHON_VERSION} uv
 RUN uv venv /venv
 RUN uv pip install --no-cache-dir salt==${SALT_VERSION} pygit2 \
-    croniter tornado backports.ssl_match_hostname cryptography distro pyyaml looseversion packaging msgpack jinja2 pyzmq zmq
+    croniter tornado backports.ssl_match_hostname cryptography distro pyyaml looseversion packaging msgpack jinja2 pyzmq==25.1.2 zmq
 
 FROM cgr.dev/chainguard/wolfi-base AS runner
 ARG PYTHON_VERSION=3.10
@@ -27,5 +27,8 @@ USER root
 RUN apk add --no-cache bash python-${PYTHON_VERSION} libcrypto3 libgit2 openssh-client && ldconfig -v
 USER nonroot
 COPY --from=builder --chown=nonroot:nonroot /venv /venv
-ENV PATH=/venv/bin:$PATH
+ENV VIRTUAL_ENV /venv \
+    PATH=/venv/bin:$PATH
+
+WORKDIR /venv
 ENTRYPOINT ["salt-master"]
