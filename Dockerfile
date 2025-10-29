@@ -26,7 +26,7 @@ LABEL org.opencontainers.image.licenses="Apache2"
 LABEL org.opencontainers.image.vendor="githubcdr"
 
 USER root
-RUN apk add --no-cache bash python-${PYTHON_VERSION} libcrypto3 libgit2 openssh-client py${PYTHON_VERSION}-cython
+RUN apk add --no-cache bash python-${PYTHON_VERSION} libcrypto3 libgit2 openssh-client py{PYTHON_VERSION}-cython-bin
 USER nonroot
 COPY --from=builder --chown=nonroot:nonroot /venv /venv
 ENV PATH=/venv/bin:$PATH
