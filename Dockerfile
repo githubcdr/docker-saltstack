@@ -13,7 +13,7 @@ WORKDIR /venv
 RUN apk add --no-cache uv libcrypto3 libgit2-dev libgit2 python-${PYTHON_VERSION}-dev gcc build-base glibc-dev ld-linux swig
 RUN uv venv /venv
 RUN uv pip install --no-cache-dir salt==${SALT_VERSION} pygit2 croniter tornado backports.ssl_match_hostname \
-    cryptography distro pyyaml looseversion packaging msgpack jinja2 pyzmq==25.1.2 zmq M2Crypto
+    cryptography distro pyyaml looseversion packaging msgpack jinja2 pyzmq==25.1.2 zmq M2Crypto timelib
 
 FROM cgr.dev/chainguard/wolfi-base AS runner
 ARG PYTHON_VERSION=3.10
