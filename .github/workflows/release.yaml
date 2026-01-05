@@ -63,8 +63,6 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-            type=ref,event=tag
-            type=ref,event=branch
             type=raw,value=latest,enable=${{ github.event_name == 'release' || github.event_name == 'schedule' }}
           labels: |
             maintainer=${{ github.actor }}
