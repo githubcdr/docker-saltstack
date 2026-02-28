@@ -132,7 +132,7 @@ jobs:
 
       - name: Generate Artifact Attestations
         if: env.DO_PUSH == 'true'
-        uses: actions/attest-build-provenance@v3
+        uses: actions/attest-build-provenance@v4
         with:
           subject-name: ghcr.io/${{ github.repository_owner }}/saltstack
           subject-digest: ${{ steps.docker_build.outputs.digest }}
