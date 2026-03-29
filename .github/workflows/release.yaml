@@ -126,9 +126,7 @@ jobs:
           TAGS: ${{ steps.meta.outputs.tags }}
           DIGEST: ${{ steps.docker_build.outputs.digest }}
         run: |
-          for tag in ${TAGS//,/ }; do
-            cosign sign --yes "${tag}@${DIGEST}"
-          done
+          echo "${TAGS}" | xargs -I {} cosign sign --yes "{}@${DIGEST}"
 
       - name: Generate Artifact Attestations
         if: env.DO_PUSH == 'true'
