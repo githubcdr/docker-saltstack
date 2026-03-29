@@ -81,7 +81,7 @@ jobs:
 
       - name: Install Cosign
         if: env.DO_PUSH == 'true'
-        uses: sigstore/cosign-installer@v4.1.0
+        uses: sigstore/cosign-installer@v4.1.1
 
       - name: Login to GHCR
         if: env.DO_PUSH == 'true'
