@@ -41,6 +41,7 @@ jobs:
           fetch-depth: 0
 
       - name: Fetch and checkout latest release tag
+        id: get_tag
         if: github.event_name == 'schedule'
         run: |
           git fetch --tags
@@ -51,18 +52,21 @@ jobs:
           fi
           echo "Latest release tag: $LATEST_TAG"
           git checkout "$LATEST_TAG"
+          # Sla de tag op voor gebruik in de volgende stappen
+          echo "tag=$LATEST_TAG" >> $GITHUB_OUTPUT
 
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v6
         with:
           images: |
-            name=ghcr.io/${{ github.repository_owner }}/saltstack
-            name=docker.io/cdrocker/saltstack
+            ghcr.io/${{ github.repository_owner }}/hosting-tools
+            docker.io/cdrocker/hosting-tools
           tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
+            # 'pattern={{version}}' verwijdert automatisch de 'v' prefix
+            type=semver,pattern={{version}},value=${{ steps.get_tag.outputs.tag || github.ref_name }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ steps.get_tag.outputs.tag || github.ref_name }}
+            type=semver,pattern={{major}},value=${{ steps.get_tag.outputs.tag || github.ref_name }}
           labels: |
             maintainer=${{ github.actor }}
             org.opencontainers.image.title=saltstack
