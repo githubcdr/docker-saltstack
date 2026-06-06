@@ -13,7 +13,7 @@ WORKDIR /venv
 RUN apk add --no-cache uv libcrypto3 libgit2-dev libgit2 python-${PYTHON_VERSION}-dev gcc build-base glibc-dev ld-linux swig
 RUN uv venv /venv
 RUN uv pip install --no-cache-dir salt==${SALT_VERSION} pygit2 croniter tornado backports.ssl_match_hostname \
-    "cryptography>=42.0.4" distro pyyaml looseversion packaging msgpack jinja2 pyzmq zmq M2Crypto timelib
+    cryptography distro pyyaml looseversion packaging msgpack jinja2 pyzmq zmq M2Crypto timelib
 
 FROM cgr.dev/chainguard/wolfi-base AS runner
 ARG PYTHON_VERSION=3.13
@@ -26,7 +26,7 @@ LABEL org.opencontainers.image.licenses="Apache2"
 LABEL org.opencontainers.image.vendor="githubcdr"
 
 USER root
-RUN apk add --no-cache bash python-${PYTHON_VERSION} libcrypto3 libgit2 openssh-client py${PYTHON_VERSION}-cython-bin
+RUN apk add --no-cache bash python-${PYTHON_VERSION} libcrypto3 libgit2 openssh-client cython py${PYTHON_VERSION}-cython-bin midnight-commander
 USER nonroot
 COPY --from=builder --chown=nonroot:nonroot /venv /venv
 ENV PATH=/venv/bin:$PATH
