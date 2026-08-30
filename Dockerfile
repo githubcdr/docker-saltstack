@@ -1,5 +1,5 @@
 FROM cgr.dev/chainguard/wolfi-base AS builder
-ARG PYTHON_VERSION=3.13
+ARG PYTHON_VERSION=3.14
 ARG SALT_VERSION=3008.2
 
 ENV PYTHONUNBUFFERED=1 \
@@ -16,7 +16,7 @@ RUN uv pip install --no-cache-dir salt==${SALT_VERSION} pygit2 croniter tornado 
     cryptography distro pyyaml looseversion packaging msgpack jinja2 pyzmq zmq M2Crypto timelib
 
 FROM cgr.dev/chainguard/wolfi-base AS runner
-ARG PYTHON_VERSION=3.13
+ARG PYTHON_VERSION=3.14
 
 LABEL org.opencontainers.image.title="Saltstack container"
 LABEL org.opencontainers.image.description="Saltstack with minimal dependencies"
