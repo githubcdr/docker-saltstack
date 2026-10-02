@@ -2,5 +2,17 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^Dockerfile$/"
+      ],
+      "matchStrings": [
+        "# renovate: depName=(?<depName>salt) datasource=(?<datasource>pypi) versioning=(?<versioning>pep440)\\r?\\nARG SALT_VERSION=(?<currentValue>[^\\s]+)"
+      ],
+      "description": "Update the Salt PyPI version pinned in the Dockerfile build argument"
+    }
   ]
 }
