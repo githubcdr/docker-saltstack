@@ -1,7 +1,7 @@
 FROM cgr.dev/chainguard/wolfi-base AS builder
 ARG PYTHON_VERSION=3.14
 # renovate: depName=salt datasource=pypi versioning=pep440
-ARG SALT_VERSION=3008.2
+ARG SALT_VERSION=3008.3
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
